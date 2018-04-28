@@ -19,4 +19,9 @@ server <- function(input, output){
       image_write(tempfile(fileext='jpg'), format = 'jpg')
     list(src = tmpfile, contentType = "image/jpeg")
   })
+  
+  output$career_summary_table <- renderTable({
+    career_summary_stats %>% filter(Player == as.character(input$player_name))
+  })
+  
 }
