@@ -15,13 +15,24 @@ sidebar <- dashboardSidebar(
 
 ##----------------------------------------------------------------------------------
 body <- dashboardBody(
-  imageOutput("img"),
-  tableOutput(
-    outputId = "table"
-  ),
-  tableOutput(
+  fluidRow(
+  box(
+    width = 3,
+    height = 250,
+    title = "Profile Picture",
+    imageOutput("img")),
+  box(
+    width = 9,
+    title = "Player Information",
+    tableOutput(
+      outputId = "table"
+  )),
+  box(
+    width = 9,
+    title = "Career Stats",
+    tableOutput(
     outputId = "career_summary_table"
-  )
+  )))
 )
 
 ui <- dashboardPage(header, sidebar, body)
