@@ -9,7 +9,7 @@ sidebar <- dashboardSidebar(
   textInput(
     inputId = "player_name",
     label = "Type a name of Player :",
-    value = "Lebron James"
+    value = "LeBron James"
   )
 )
 
@@ -18,6 +18,9 @@ body <- dashboardBody(
   imageOutput("img"),
   tableOutput(
     outputId = "table"
+  ),
+  tableOutput(
+    outputId = "career_summary_table"
   )
 )
 
