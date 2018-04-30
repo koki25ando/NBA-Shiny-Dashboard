@@ -24,4 +24,12 @@ server <- function(input, output){
     career_summary_stats %>% filter(Player == as.character(input$player_name))
   })
   
+  output$career_plot <- renderPlot({
+    stats_advanced %>% 
+      filter(Player == as.character(input$player_name)) %>% 
+      ggplot(aes(x = Year, y = PPG)) + 
+      geom_point() + 
+      geom_line() +
+      ylim(0, 40)
+  })
 }
