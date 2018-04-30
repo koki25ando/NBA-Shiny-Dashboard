@@ -47,3 +47,12 @@ career_summary_stats <-
   select(Player, PPG:SPG) %>% 
   distinct(Player, .keep_all = TRUE)
 career_summary_stats <- as.data.frame(career_summary_stats)
+
+#####----------PLOT------------
+stats_advanced <- players_season_stats %>% 
+  mutate(PPG = PTS/G, RPG = TRB/G, APG = AST/G, SPG = STL/G)
+
+
+
+
+
