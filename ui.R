@@ -1,25 +1,25 @@
-library(shiny)
-library(tidyverse)
 
 ##-------------------------------------------------------------Header---------------------
 header <- dashboardHeader()
 
 ##------------------------------------------------------------Sidebar----------------------
 sidebar <- dashboardSidebar(
-  textInput(
+  selectizeInput(
     inputId = "player_name",
     label = "Type a name of Player :",
-    value = "LeBron James",
-    placeholder = players_list_since1950$Player
+    choices = unique(players_list_since1950$Player),
+    multiple = F,
+    options = list(maxItems = 5, placeholder = 'Select a name'),
+    selected = "LeBron James"
+  ),
+  selectInput(
+    inputId = "stats_type",
+    label = "Select stats type :",
+    choices = stats_advanced %>% 
+      select(PPG:SPG) %>% 
+      names(),
+    selected = "PPG"
   )
-  # selectizeInput(
-  #   inputId = "player_name",
-  #   label = "Type a name of Player :",
-  #   choices = players_list_since1950$Player,
-  #   selected = "LeBron James",
-  #   multiple = FALSE,
-  #   options = NULL
-  # )
 )
 
 ##--------------------------------------------------------------BODY------------------------
