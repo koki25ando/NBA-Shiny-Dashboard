@@ -19,7 +19,8 @@ sidebar <- dashboardSidebar(
       select(PPG:SPG) %>% 
       names(),
     selected = "PPG"
-  )
+  ),
+  submitButton("SUBMIT", icon("refresh"))
 )
 
 ##--------------------------------------------------------------BODY------------------------
