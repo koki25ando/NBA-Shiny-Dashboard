@@ -46,14 +46,14 @@ body <- dashboardBody(
   box(
     width = 6,
     title = "Plot",
-    plotOutput(
+    plotlyOutput(
       outputId = "career_plot"
     )
   ),
   box(
     width = 6,
     title = "Plot",
-    plotOutput(
+    plotlyOutput(
       outputId = "cumulative_plot"
     )
   )
