@@ -4,6 +4,7 @@ library(SportsAnalytics)
 library(stringr)
 library(magick)
 library(shinydashboard)
+library(plotly)
 
 players_list_since1950 <- fread("https://s3-ap-southeast-2.amazonaws.com/koki25ando/Players.csv", data.table = FALSE)
 players_list_since1950 <- players_list_since1950 %>% select(-V1)
@@ -52,7 +53,17 @@ career_summary_stats <- as.data.frame(career_summary_stats)
 stats_advanced <- players_season_stats %>% 
   mutate(PPG = PTS/G, RPG = TRB/G, APG = AST/G, SPG = STL/G)
 
+#####----------Cumulative stats
+career_cumulative_stats <- 
+  players_season_stats %>% 
+  group_by(Player) %>% 
+  mutate(Career_PTS = cumsum(PTS), Career_TRB = cumsum(TRB), 
+         Career_AST = cumsum(AST), Career_STL = cumsum(STL), 
+         Career_BLK = cumsum(BLK))
 
+career_cumulative_stats <- 
+  career_cumulative_stats %>% 
+  select(Year, Player, TRB:Career_BLK)
 
 
 
