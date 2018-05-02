@@ -1,6 +1,3 @@
-library(shiny)
-library(tidyverse)
-
 server <- function(input, output){
   output$table <- renderTable({
     players_list_since1950 %>% 
@@ -29,7 +26,14 @@ server <- function(input, output){
       filter(Player == as.character(input$player_name)) %>% 
       ggplot(aes(x = Year, y = PPG)) + 
       geom_point() + 
-      geom_line() +
-      ylim(0, 40)
+      geom_line()
+  })
+  
+  output$cumulative_plot <- renderPlot({
+    career_cumulative_stats %>% 
+      filter(Player == as.character(input$player_name)) %>% 
+      ggplot(aes(x = Year, y = Career_PTS)) + 
+      geom_point() +
+      geom_step()
   })
 }
