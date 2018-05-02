@@ -49,7 +49,15 @@ body <- dashboardBody(
     plotOutput(
       outputId = "career_plot"
     )
-  ))
+  ),
+  box(
+    width = 6,
+    title = "Plot",
+    plotOutput(
+      outputId = "cumulative_plot"
+    )
+  )
+  )
 )
 
 ui <- dashboardPage(header, sidebar, body)
