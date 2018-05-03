@@ -30,12 +30,15 @@ server <- function(input, output){
     ggplotly(career_plotly)
   })
   
-  output$cumulative_plot <- renderPlotly({
-    career_cumulative_plotly <- career_cumulative_stats %>% 
-      filter(Player == as.character(input$player_name)) %>% 
-      ggplot(aes(x = Year, y = Career_PTS)) + 
-      geom_point() +
-      geom_step()
-    ggplotly(career_cumulative_plotly)
+  output$cumulative_plot <- renderPlot({
+    ggplot() +
+      geom_step(aes(nth, Career_PTS, group = Player), 
+                data = career_cumulative_stats_nth, 
+                colour = alpha("grey", 0.7)) +
+      geom_step(aes(nth, Career_PTS, group = Player), 
+                data = career_cumulative_stats_nth %>%
+                  filter(Player == as.character(input$player_name))) +
+      labs(x = "Season") +
+      xlim(0, 25)
   })
 }
