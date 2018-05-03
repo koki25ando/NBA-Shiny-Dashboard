@@ -65,5 +65,9 @@ career_cumulative_stats <-
   career_cumulative_stats %>% 
   select(Year, Player, TRB:Career_BLK)
 
+####------------nth
 
+career_cumulative_stats_nth <- career_cumulative_stats %>% 
+  group_by(Player) %>% 
+  mutate(nth = Year - min(Year) + 1)
 
