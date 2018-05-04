@@ -22,9 +22,10 @@ server <- function(input, output){
   })
   
   output$career_plot <- renderPlotly({
-    career_plotly <- stats_advanced %>% 
-      filter(Player == as.character(input$player_name)) %>% 
-      ggplot(aes(x = Year, y = PPG)) + 
+    dataset_for_career_plot <- stats_advanced %>% 
+      filter(Player == as.character(input$player_name))
+    career_plotly <- dataset_for_career_plot %>% 
+      ggplot(aes_string(x = dataset_for_career_plot$Year, y = input$stats_type)) + 
       geom_point() + 
       geom_line()
     ggplotly(career_plotly)
