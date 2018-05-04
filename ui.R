@@ -53,7 +53,7 @@ body <- dashboardBody(
   box(
     width = 6,
     title = "Plot",
-    plotlyOutput(
+    plotOutput(
       outputId = "cumulative_plot"
     )
   )
