@@ -16,7 +16,7 @@ sidebar <- dashboardSidebar(
     inputId = "stats_type",
     label = "Select stats type :",
     choices = stats_advanced %>% 
-      select(PPG:SPG) %>% 
+      select(PTS:STL) %>% 
       names(),
     selected = "PPG"
   ),
@@ -52,7 +52,7 @@ body <- dashboardBody(
   ),
   box(
     width = 6,
-    title = "Plot",
+    title = "Cumulative Plot",
     plotOutput(
       outputId = "cumulative_plot"
     )
