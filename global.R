@@ -53,6 +53,10 @@ career_summary_stats <- as.data.frame(career_summary_stats)
 stats_advanced <- players_season_stats %>% 
   mutate(PPG = PTS/G, RPG = TRB/G, APG = AST/G, SPG = STL/G)
 
+stats_advanced <- stats_advanced %>% 
+  select(-PTS, -TRB, -AST, -STL)
+names(stats_advanced)[26:29] <- c("PTS", "TRB", "AST", "STL")
+
 #####----------Cumulative stats
 career_cumulative_stats <- 
   players_season_stats %>% 
@@ -71,3 +75,9 @@ career_cumulative_stats_nth <- career_cumulative_stats %>%
   group_by(Player) %>% 
   mutate(nth = Year - min(Year) + 1)
 
+career_cumulative_stats_nth <- career_cumulative_stats_nth %>% 
+  select(Player, nth, Career_PTS, Career_TRB, Career_AST, Career_STL)
+names(career_cumulative_stats_nth) <- c("Player", "nth", "PTS", "TRB", "AST", "STL")
+
+career_cumulative_stats_nth <-  as.data.frame(career_cumulative_stats_nth)
+career_cumulative_stats_nth$Player <- as.factor(career_cumulative_stats_nth$Player)
