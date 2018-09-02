@@ -1,3 +1,4 @@
+##------- UI Script -------
 
 ##-------------------------------------------------------------Header---------------------
 header <- dashboardHeader()
@@ -16,7 +17,8 @@ sidebar <- dashboardSidebar(
     inputId = "stats_type",
     label = "Select stats type :",
     choices = stats_advanced %>% 
-      select(PTS:STL) %>% 
+      # select(PTS:STL) %>% 
+      select(PPG:SPG) %>% 
       names(),
     selected = "PPG"
   ),
