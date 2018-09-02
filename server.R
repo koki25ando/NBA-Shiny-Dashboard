@@ -1,3 +1,5 @@
+##------- Server Script -------
+
 server <- function(input, output){
   output$table <- renderTable({
     players_list_since1950 %>% 
@@ -33,16 +35,11 @@ server <- function(input, output){
   
   output$cumulative_plot <- renderPlot({
     ggplot() +
-      geom_step(aes_string(x = "nth", 
+      geom_line(data = career_cumulative_stats_nth,
+                aes_string(x = "nth", 
                            y = input$stats_type, 
-                           fill = "Player"),
-                data = career_cumulative_stats_nth, 
-                colour = alpha("grey", 0.7)) +
-      geom_step(aes_string(x = "nth", 
-                           y = input$stats_type, 
-                           fill = "Player"), colour = "red",
-                data = career_cumulative_stats_nth %>%
-                  filter(Player == as.character(input$player_name))) +
+                           colour = "Player")) +
+      gghighlight(Player == as.character(input$player_name)) +
       labs(x = "Season") +
       xlim(0, 25)
   })
