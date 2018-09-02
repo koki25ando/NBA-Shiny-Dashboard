@@ -1,11 +1,15 @@
+##------- Global Setting Script -------
+
+# Package
 library(data.table)
 library(tidyverse)
 library(SportsAnalytics)
-library(stringr)
 library(magick)
 library(shinydashboard)
 library(plotly)
+library(gghighlight)
 
+# Data Import and cleaning
 players_list_since1950 <- fread("https://s3-ap-southeast-2.amazonaws.com/koki25ando/Players.csv", data.table = FALSE)
 players_list_since1950 <- players_list_since1950 %>% select(-V1)
 
@@ -53,9 +57,9 @@ career_summary_stats <- as.data.frame(career_summary_stats)
 stats_advanced <- players_season_stats %>% 
   mutate(PPG = PTS/G, RPG = TRB/G, APG = AST/G, SPG = STL/G)
 
-stats_advanced <- stats_advanced %>% 
-  select(-PTS, -TRB, -AST, -STL)
-names(stats_advanced)[26:29] <- c("PTS", "TRB", "AST", "STL")
+# stats_advanced <- stats_advanced %>% 
+#   select(-PTS, -TRB, -AST, -STL)
+# names(stats_advanced)[26:29] <- c("PTS", "TRB", "AST", "STL")
 
 #####----------Cumulative stats
 career_cumulative_stats <- 
@@ -81,3 +85,5 @@ names(career_cumulative_stats_nth) <- c("Player", "nth", "PTS", "TRB", "AST", "S
 
 career_cumulative_stats_nth <-  as.data.frame(career_cumulative_stats_nth)
 career_cumulative_stats_nth$Player <- as.factor(career_cumulative_stats_nth$Player)
+names(career_cumulative_stats_nth) <- c("Player", "nth", "PPG", "RPG", "APG", "SPG" )
+
